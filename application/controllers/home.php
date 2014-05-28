@@ -5,10 +5,9 @@ class Home extends CI_Controller {
     {
     	$this->load->model('BrainModel');
 
-    	if (isset($_POST['say'])==null){
-            $reply="...";
-        } else {
-        	$reply=$this->BrainModel->search($_POST['say']);
+    	$reply=array();
+    	if (isset($_POST['say'])){
+            $reply=$this->BrainModel->think($_POST['say']);
         }
 
         $data['reply']=$reply;
