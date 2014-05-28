@@ -1,0 +1,7 @@
+create table brain(
+brain_id serial,
+memory varchar(250),
+knowledge varchar(250),
+
+primary key(brain_id)
+);
