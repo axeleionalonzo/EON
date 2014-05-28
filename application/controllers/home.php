@@ -5,14 +5,10 @@ class Home extends CI_Controller {
     {
     	$this->load->model('BrainModel');
 
-    	if (isset($_POST['say'])){
-
-    		$comprehend = str_word_count($_POST['say'],1);
-    		for ($i=0;$i<count($comprehend);$i++) {
-    			$reply=$this->BrainModel->search($comprehend[$i]);
-    		}
+    	if (isset($_POST['say'])==null){
+            $reply="...";
         } else {
-            $reply="";
+        	$reply=$this->BrainModel->search($_POST['say']);
         }
 
         $data['reply']=$reply;

@@ -30,7 +30,7 @@
         <center>
           <?php
             for ($i=0;$i<count($reply);$i++) { 
-              echo $reply[$i]->knowledge;
+              echo " " . $reply[$i]->knowledge;
             }
           ?>
         </center>
