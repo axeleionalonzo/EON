@@ -13,26 +13,16 @@
       <div class="container">
         <br><br><br><br><br><br>
         
-        
-
         <center>
           <?php
-            for ($i=0;$i<count($reply);$i++) { 
-              echo " " . $reply[$i]->knowledge;
-            }
-          ?>
-
-          <?php 
-            if (form_error('memory')) { 
-              echo "I know that already."; 
-            }
-            if (form_error('knowledge')) { 
-              echo "I know that already."; 
-            }
+              echo " " . $reply[rand(0,(count($reply)-1))]->sorry;
           ?>
         </center>
+        
         <br>
+
         <form action="<?php echo base_url();?>index.php/home" class="navbar-form navbar-center" method="post" role="search">
+
           <div class="row clearfix">
             <div class="col-md-4 column">
               </div>
@@ -45,6 +35,28 @@
               </div>
           </div>
         </form>
+
+          <br>
+
+        <?php echo form_open('home/remember');?>
+
+          <div class="row clearfix">
+            <div class="col-md-4 column">
+              </div>
+            <div class="col-md-4 column">
+              <p>Define: <?php echo $define; ?></p>
+                <div class="form-group">
+                  <input type="hidden" name="memory" class="form-control" size="50" value="<?php echo $define; ?>">
+                  <span class="help-block"><font color="red"><?php echo form_error('memory');?></font></span>
+                  <input type="text" name="knowledge" class="form-control" size="50" placeholder="What am i supposed to say to that?">
+                  <span class="help-block"><font color="red"><?php echo form_error('knowledge');?></font></span>
+                </div>
+            </div>
+            <div class="col-md-4 column">
+              </div>
+            </div>
+          </form>
+
         
       
       </div>

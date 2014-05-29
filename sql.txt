@@ -5,3 +5,10 @@ knowledge varchar(250),
 
 primary key(brain_id)
 );
+
+create table confusion(
+confusion_id serial,
+sorry varchar(250),
+
+primary key(confusion_id)
+);
