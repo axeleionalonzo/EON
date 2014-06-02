@@ -4,16 +4,21 @@ class Home extends CI_Controller {
     public function index()
     {
         $this->load->model('BrainModel');
-        if (isset($_POST['say'])){
-            $say=$this->BrainModel->think($_POST['say']);
+
+        if (isset($_POST['say'])) {
+            $answer = $_POST['say'];
+            $say=$this->BrainModel->think($answer);
             if ($say==NULL) {
                 $this->change_topic();
             } else {
                 $data['say']=$say;
-                $this->load->view('home/main', $data);
+                $this->load->view('home/learn', $data);
             }
         } else {
-            $this->change_topic();
+            $say=$this->BrainModel->get_topic();
+
+            $data['say']=$say;
+            $this->load->view('home/learn', $data);
         }
     }
 

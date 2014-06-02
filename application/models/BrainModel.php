@@ -19,17 +19,8 @@ class BrainModel extends CI_Model {
         
             return $query->result();
         } else {
-            $this->db->where('question', $say);
-            $query = $this->db->get('learn');
-
-            if($query->num_rows == 1) {
-                $query = $this->db->get('learn');
-
-                return $query->result();
-            } else {
-                $this->question = $say;
-                $this->db->insert('learn', $this);
-            }
+            $this->question = $say;
+            $this->db->insert('learn', $this);
         }
     }
 
