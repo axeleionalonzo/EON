@@ -12,25 +12,20 @@
       
       <div class="container">
         <br><br><br><br><br><br>
-        
-        
 
         <center>
           <?php
-            for ($i=0;$i<count($reply);$i++) { 
-              echo " " . $reply[$i]->knowledge;
-            }
-          ?>
-
-          <?php 
-            if (form_error('memory')) { 
-              echo "I know that already."; 
-            }
-            if (form_error('knowledge')) { 
-              echo "I know that already."; 
-            }
+          if ($say==NULL) {
+            echo " ";
+          } else {
+            $ran_num=rand(0,(count($say)-1));
+            $question=$say[$ran_num]->question;
+            echo " " . $question;
+          }
+            
           ?>
         </center>
+
         <br>
         <form action="<?php echo base_url();?>index.php/home" class="navbar-form navbar-center" method="post" role="search">
           <div class="row clearfix">

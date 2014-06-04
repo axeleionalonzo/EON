@@ -8,56 +8,57 @@ class BrainModel extends CI_Model {
         parent::__construct();
     }
     
-    function think_tag($say)
-    {
-        if ($say=="") {
-            
-        } elseif ($say==" ") {
-            
-        } else {
-            $comprehend = str_word_count($say,1);
-            $sql = "SELECT * FROM brain WHERE memory LIKE ('%$comprehend[0]%')" ;
-
-                for ($i=1;$i<count($comprehend);$i++) {
-                    $additionalSQL = " or memory LIKE ('%$comprehend[$i]%')";
-                    $sql.=$additionalSQL;
-                }
-
-            $query =$this->db->query($sql, array($say)); 
-           
-            return $query->result();
-        }
-        
-    }
-
     function think($say)
     {
-        if ($say=="") {
-            
-        } elseif ($say==" ") {
-            
-        } else {
-            $sql = "SELECT * FROM brain WHERE memory LIKE ('%$say%')";
+        $this->db->where('question', $say);
+        $query = $this->db->get('memory');
+
+        if($query->num_rows == 1) {
+            $sql = "SELECT * FROM memory WHERE question LIKE ('%$say%')";
             $query = $this->db->query($sql, array($say));
         
             return $query->result();
+        } else {
+            $this->db->where('question', $say);
+            $query = $this->db->get('learn');
+
+            if($query->num_rows == 1) {
+                $query = $this->db->get('learn');
+
+                return $query->result();
+            } else {
+                $this->question = $say;
+                $this->db->insert('learn', $this);
+            }
         }
-        
     }
 
-    function confuse()
+    function get_topic()
     {
-        $query = $this->db->get('confusion');
+        $query = $this->db->get('learn');
 
         return $query->result();
     }
 
-    function learn()
+    function ask()
     {
-        $this->memory = $_POST['memory']; // please read the below note
-        $this->knowledge = $_POST['knowledge'];
+        $query = $this->db->get('memory');
+
+        return $query->result();
+    }
+
+    function memorize()
+    {
+        $this->question = $_POST['question'];
+        $this->answer = $_POST['answer'];
         
-        $this->db->insert('brain', $this);
+        $this->db->insert('memory', $this);
+    }
+
+    function forget($learn_id)
+    {
+        $this->db->where('learn_id', $learn_id);
+        $this->db->delete('learn');
     }
 }
 ?>

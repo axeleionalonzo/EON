@@ -1,14 +1,20 @@
-create table brain(
-brain_id serial,
-memory varchar(250),
-knowledge varchar(250),
+create table memory(
+memory_id serial,
+question varchar(250),
+answer varchar(250),
 
-primary key(brain_id)
+primary key(memory_id)
 );
 
-create table confusion(
-confusion_id serial,
-sorry varchar(250),
+create table learn(
+learn_id serial,
+question varchar(250),
 
-primary key(confusion_id)
+primary key(learn_id)
 );
+
+INSERT INTO learn (question)
+VALUES ('hi');
+
+INSERT INTO learn (question)
+VALUES ('hello');

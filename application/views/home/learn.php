@@ -15,41 +15,25 @@
         
         <center>
           <?php
-              echo " " . $reply[rand(0,(count($reply)-1))]->sorry;
+            $ran_num=rand(0,(count($say)-1));
+            $question=$say[$ran_num]->question;
+            echo " " . $question;
           ?>
         </center>
-        
+
         <br>
 
-        <form action="<?php echo base_url();?>index.php/home" class="navbar-form navbar-center" method="post" role="search">
-
-          <div class="row clearfix">
-            <div class="col-md-4 column">
-              </div>
-            <div class="col-md-4 column">
-                <div class="form-group">
-                  <input type="text" name="say" class="form-control" size="50" placeholder="What are you Thinking?">
-                </div>
-            </div>
-            <div class="col-md-4 column">
-              </div>
-          </div>
-        </form>
-
-          <br>
-
         <?php echo form_open('home/remember');?>
-
+          <input type="hidden" name="learn_id" value="<?php echo $say[$ran_num]->learn_id?>">
           <div class="row clearfix">
             <div class="col-md-4 column">
               </div>
             <div class="col-md-4 column">
-              <p>Define: <?php echo $define; ?></p>
                 <div class="form-group">
-                  <input type="hidden" name="memory" class="form-control" size="50" value="<?php echo $define; ?>">
-                  <span class="help-block"><font color="red"><?php echo form_error('memory');?></font></span>
-                  <input type="text" name="knowledge" class="form-control" size="50" placeholder="What am i supposed to say to that?">
-                  <span class="help-block"><font color="red"><?php echo form_error('knowledge');?></font></span>
+                  <input type="hidden" name="question" class="form-control" value="<?php echo $question; ?>">
+                  <span class="help-block"><font color="red"><?php echo form_error('question');?></font></span>
+                  <input type="text" name="answer" class="form-control" size="50" placeholder="">
+                  <span class="help-block"><font color="red"><?php echo form_error('answer');?></font></span>
                 </div>
             </div>
             <div class="col-md-4 column">
